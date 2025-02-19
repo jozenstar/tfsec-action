@@ -13,6 +13,11 @@ else
   TFSEC_VERSION="latest"
 fi
 
+arch="$(uname -m)"
+if [ "$arch" = "x86_64" ]; then
+  arch="amd64"
+fi
+
 function get_release_assets() {
   repo="$1"
   version="$2"
@@ -33,7 +38,7 @@ function get_release_assets() {
 function install_release() {
   repo="$1"
   version="$2"
-  binary="$3-linux-amd64"
+  binary="$3-linux-$arch"
   checksum="$4"
   release_assets="$(get_release_assets "${repo}" "${version}")"
 
